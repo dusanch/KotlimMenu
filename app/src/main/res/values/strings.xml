@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">QR Skener</string>
+
+    <!-- Položky menu -->
+    <string name="drawer_scan">Skenovať</string>
+    <string name="drawer_scan_image">Naskenovať obrázok</string> <!-- Používa sa aj pre názov obrazovky -->
+    <string name="drawer_favorites">Obľúbené položky</string>
+    <string name="drawer_history">História</string>
+    <string name="drawer_my_qr">Moje QR kódy</string>
+    <string name="drawer_create_qr">Vytvoriť QR kód</string>
+    <string name="drawer_settings">Nastavenia</string>
+    <string name="drawer_share_app">Zdieľať aplikáciu</string>
+    <string name="drawer_our_apps">Naše aplikácie</string>
+    <string name="drawer_remove_ads">Odstrániť reklamy</string>
+
+    <!-- Názvy obrazoviek (pre TopAppBar a placeholder texty) -->
+    <string name="screen_title_scan">Skenovať QR</string>
+    <string name="screen_title_scan_image">Naskenovať obrázok</string> <!-- TOTO STE POTREBOVALI PRIDAŤ -->
+    <string name="screen_title_favorites">Obľúbené</string>
+    <string name="screen_title_history">História</string>
+    <string name="screen_title_my_qr">Moje QR kódy</string>
+    <string name="screen_title_create_qr">Vytvoriť QR kód</string>
+    <string name="screen_title_settings">Nastavenia</string>
+
+    <!-- Ostatné -->
+    <string name="cd_open_menu">Otvoriť menu</string>
+    <string name="cd_scan_qr">Naskenovať QR kód (FAB)</string>
+    <string name="cd_back">Späť</string>
+    <string name="camera_preview_placeholder">Náhľad kamery tu</string>
+    <string name="share_app_text">Ahoj! Vyskúšaj túto skvelú aplikáciu na QR kódy: %1$s</string>
+    <string name="share_app_via">Zdieľať aplikáciu cez</string>
+    <string name="drawer_about">cccc</string>
+    <string name="app_name_qr_scanner">skener</string>
+    <string name="screen_title_setting">nastavenie</string>
+    <string name="settings_section_general">111</string>
+    <string name="settings_enable_notifications">2222</string>
+    <string name="settings_enable_notifications_desc">3333</string>
+    <string name="settings_enable_vibration">4444</string>
+    <string name="settings_enable_vibration_desc">5555</string>
+    <string name="settings_dark_theme">6666</string>
+    <string name="settings_section_appearance">7777</string>
+    <string name="settings_dark_theme_desc">8888</string>
+    <string name="settings_section_other">9999</string>
+    <string name="settings_privacy_policy">123</string>
+    <string name="settings_about_app">456</string>
+
+</resources>
