@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle // <<--- POTREBNÝ IMPORT PRE OnCreate
-import androidx.activity.ComponentActivity // <<--- POTREBNÝ IMPORT
-import androidx.activity.compose.setContent // <<--- POTREBNÝ IMPORT
-import androidx.compose.foundation.layout.*
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
@@ -15,10 +17,19 @@ import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.ImageSearch
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.QrCodeScanner
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.CreditCardOff
+import androidx.compose.material.icons.outlined.QrCode2
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -26,26 +37,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
-
-// Importy pre vaše obrazovky (predpokladáme, že sú v samostatných súboroch)
-import com.dct.qr.ui.scanimage.ScanImageScreen
-// Pridajte import pre ScanImageScreen, ak ho používate
-import com.dct.qr.ui.scanimage.ScanImageScreen // <<--- PRIDAJTE TENTO IMPORT AK POUŽÍVATE ScanImageScreen
+import com.dct.qr.ui.ScanScreen
+import com.dct.qr.ui.createqr.CreateQRScreen
 import com.dct.qr.ui.favorites.FavoritesScreen
 import com.dct.qr.ui.history.HistoryScreen
 import com.dct.qr.ui.myqr.MyQRScreen
-import com.dct.qr.ui.createqr.CreateQRScreen
-// Uistite sa, že názov súboru/funkcie je SettingsScreen, nie SettingScreen
-import com.dct.qr.ui.settings.SettingsScreen // <<--- ZMENENÉ z SettingScreen
-
-import androidx.compose.material.icons.filled.ImageSearch
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.CreditCardOff
-import androidx.compose.material.icons.outlined.QrCode2
-import com.dct.qr.ui.theme.QRTheme // <<--- PRIDAJTE IMPORT PRE VAŠU TÉMU
-
+import com.dct.qr.ui.scanimage.ScanImageScreen
 import com.dct.qr.ui.settings.SettingsScreen
+import com.dct.qr.ui.theme.QRTheme
+import kotlinx.coroutines.launch
 
 // Váš kód pre Screen, drawerScreens, drawerActions a Composable funkcie
 // môže byť tu, na najvyššej úrovni, mimo triedy MainActivity.
@@ -244,13 +244,13 @@ fun AppDrawerContent(
 @Composable
 fun CurrentScreenContent(screen: Screen) {
     when (screen) {
-        is Screen.Scan -> ScanImageScreen()
-        is Screen.ScanImage -> ScanImageScreen() // <<--- POUŽIJETE ScanImageScreen(), NIE ScanScreen()
+        is Screen.Scan -> ScanScreen()
+        is Screen.ScanImage -> ScanImageScreen()
         is Screen.Favorites -> FavoritesScreen()
         is Screen.History -> HistoryScreen()
         is Screen.MyQR -> MyQRScreen()
         is Screen.CreateQR -> CreateQRScreen()
-        is Screen.Settings -> SettingsScreen() // <<--- ZMENENÉ z SettingScreen()
+        is Screen.Settings -> SettingsScreen()
         else -> {
             Box(
                 modifier = Modifier.fillMaxSize(),
