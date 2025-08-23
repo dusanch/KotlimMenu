@@ -43,5 +43,219 @@
     <string name="settings_section_other">9999</string>
     <string name="settings_privacy_policy">123</string>
     <string name="settings_about_app">456</string>
+    <string name="action_send_email">Poslať email</string>
+    <string name="action_add_contact">Pridať kontakt</string>
+    <string name="action_search_web">Hľadať na webe</string>
+    <string name="action_open_link">Otvoriť odkaz</string>
+    <string name="action_share">Zdieľať</string>
+    <string name="action_copy">Kopírovať</string>
+    <string name="copied_to_clipboard">Skopírované do schránky</string>
+    <string name="share_via">Zdieľať cez</string>
+    <string name="no_email_app_found">Nenašla sa žiadna emailová aplikácia.</string>
+    <string name="no_browser_found">Nenašiel sa žiadny prehliadač.</string>
+    <string name="action_call_phone">Zavolať</string>
+    <string name="action_send_sms">Poslať SMS</string>
+    <string name="action_connect_wifi">Pripojiť k WiFi</string>
+    <string name="action_show_on_map">Zobraziť na mape</string>
+
+    <string name="scan_result_title">Výsledok skenovania</string>
+
+    <string name="camera_permission_denied">Povolenie pre fotoaparát bolo zamietnuté.</string>
+    <string name="camera_permission_needed">Pre skenovanie QR kódov je potrebné povolenie pre fotoaparát.</string>
+    <string name="grant_permission">Udeliť povolenie</string>
+
+
+    <string name="loading_camera">Načítavam kameru...</string>
+    <string name="camera_launch_error">Chyba pri spustení kamery: %1$s</string>
+    <string name="camera_permission_denied_message">Nemáte udelené povolenie na použitie kamery. Prosím, udeľte povolenie v nastaveniach aplikácie alebo kliknutím na tlačidlo nižšie.</string>
+
+
+    <string name="scan_qr_code_instruction">GGGG</string>
+    <string name="screen_title_share_app">dfdfff</string>
+    <string name="screen_title_remove_ads">gsfgrdf</string>
+    <string name="screen_title_our_apps">ghgcs d</string>
+    <string name="screen_title_scan_result">getrg1r 12gre</string>
+    <string name="action_back">gggg gggg</string>
+    <string name="action_open_drawer">getg eg re</string>
+
+    <string name="scan_qr_instruction">Umiestnite QR kód alebo čiarový kód do rámčeka</string>
+    <string name="camera_permission_needed_simple">Pre skenovanie je potrebné povolenie pre fotoaparát.</string>
+    <string name="grant_permission_simple">Udeliť povolenie</string>
+    <string name="camera_permission_rationale_simple">Bez povolenia pre fotoaparát nemôže aplikácia skenovať kódy.</string>
+    <string name="action_clear_history">Vymazať históriu</string>
+    <string name="action_delete_item">Odstrániť položku</string>
+    <string name="history_empty_placeholder">História je prázdna.</string>
+    <string name="dialog_title_clear_history">Vymazať históriu?</string>
+    <string name="dialog_message_clear_history">Naozaj chcete natrvalo odstrániť všetky záznamy z
+        histórie?
+    </string>
+    <string name="action_clear">Vymazať</string>
+    <string name="action_cancel">Zrušiť</string>
+
+        <!-- TOTO SÚ KĽÚČOVÉ STRINGY, KTORÉ MUSIA BYŤ PRÍTOMNÉ -->
+        <string name="dialog_title_delete_item">Odstrániť položku?</string>
+        <string name="dialog_message_delete_item_confirm">Naozaj chcete odstrániť položku „%1$s“?
+        </string>
+        <string name="action_delete">Odstrániť</string>
+<!-- Pre Generovanie QR kódov -->
+    <string name="screen_title_generate_qr">Generovať QR kód</string>
+    <string name="label_qr_text_input">Text pre QR kód</string>
+    <string name="button_generate_qr">Generovať</string>
+    <string name="label_generated_qr_code">Vygenerovaný QR kód:</string>
+    <string name="desc_generated_qr_code">Obrázok vygenerovaného QR kódu</string>
+    <string name="button_save_to_gallery">111111</string>
+    <string name="button_save">22222</string>
+    <string name="desc_remove_from_favorites">3333</string>
+    <string name="desc_add_to_favorites">5555</string>
+<!-- strings.xml (príklady nových stringov) -->
+    <string name="qr_type_email_address">E-mailová adresa</string>
+    <string name="qr_type_email_message">E-mailová správa</string>
+    <string name="qr_type_mms">MMS Správa</string>
+    <string name="qr_type_calendar_event_vevent">Udalosť v kalendári (VEVENT)</string>
+    <string name="qr_type_contact_mecard">Kontakt (MeCard)</string>
+    <string name="qr_type_app_store_link">Odkaz na App Store</string>
+    <string name="qr_type_deep_link">Deep Link do aplikácie</string>
+    <string name="qr_type_isbn">ISBN (Kniha)</string>
+    <string name="qr_type_product_code">Produktový kód (EAN/UPC)</string>
+    <string name="qr_type_crypto_address">Adresa kryptomeny</string>
+    <string name="qr_type_epc_payment">EPC Platba (SEPA)</string>
+    <string name="qr_type_totp_authenticator">2FA Kľúč (TOTP)</string>
+    <string name="qr_type_social_media_profile">Profil na sociálnej sieti</string>
+
+    <string name="qr_format_hint_email_address">Napr. meno@priklad.com</string>
+    <string name="qr_format_hint_email_message">Zadajte adresu, predmet a telo správy.</string>
+    <string name="qr_format_hint_mms">Zadajte číslo, predmet a text správy (podpora sa líši).
+    </string>
+    <string name="qr_format_hint_calendar_event_vevent">Vyžaduje názov udalosti, čas začiatku/konca,
+        atď. (VEVENT formát).
+    </string>
+    <string name="qr_format_hint_contact_mecard">Jednoduchý formát kontaktu: Meno, Tel, Email,
+        atď.
+    </string>
+    <string name="qr_format_hint_app_store_link">Napr. market://details?id=com.vasa.aplikacia
+    </string>
+    <string name="qr_format_hint_deep_link">Napr. vasaschema://cesta/do/obsahu</string>
+    <string name="qr_format_hint_isbn">Zadajte 10 alebo 13-miestne ISBN číslo.</string>
+    <string name="qr_format_hint_product_code">Zadajte EAN alebo UPC kód produktu.</string>
+    <string name="qr_format_hint_crypto_address">Zadajte adresu peňaženky a voliteľne sumu.</string>
+    <string name="qr_format_hint_epc_payment">Špecifický formát pre SEPA platby.</string>
+    <string name="qr_format_hint_totp_authenticator">Formát pre nastavenie dvojfaktorovej
+        autentifikácie.
+    </string>
+    <string name="qr_format_hint_social_media_profile">Zadajte plnú URL adresu profilu.</string> <!-- Príklad názvu aplikácie, upravte podľa potreby -->
+
+    <!-- Display Names for QrCodeType -->
+    <string name="qr_type_text">Obyčajný text</string>
+    <string name="qr_type_url">URL Adresa</string>
+    <string name="qr_type_wifi">WiFi Sieť</string>
+    <string name="qr_type_phone">Telefónne číslo</string>
+    <string name="qr_type_sms">SMS Správa</string>
+    <string name="qr_type_geolocation">Geolokácia</string>
+    <string name="qr_type_contact_vcard">Kontakt (vCard)</string>
+
+    <!-- Data Format Hints for QrCodeType -->
+    <string name="qr_format_hint_text">Zadajte ľubovoľný text.</string>
+    <string name="qr_format_hint_url">Napr. www.priklad.sk alebo https://mojweb.com</string>
+    <string name="qr_format_hint_wifi">Vyžaduje názov siete (SSID), typ šifrovania a heslo (formát:
+        WIFI:S:&lt;SSID&gt;;T:&lt;WEP|WPA|nopass&gt;;P:&lt;HESLO&gt;;H:&lt;true|false&gt;;).
+    </string>
+    <string name="qr_format_hint_phone">Napr. +421900123456 (formát: tel:&lt;číslo&gt;).</string>
+    <string name="qr_format_hint_sms">Zadajte telefónne číslo a voliteľne text správy (formát:
+        smsto:&lt;číslo&gt;:&lt;správa&gt;).
+    </string>
+    <string name="qr_format_hint_geolocation">Zadajte zemepisnú šírku a dĺžku (formát: geo:&lt;lat&gt;,&lt;lon&gt;?q=&lt;popis&gt;).</string>
+    <string name="qr_format_hint_contact_vcard">Vyžaduje meno, telefónne číslo, e-mail, atď. (vCard
+        formát).
+    </string>
+
+    <!-- Príklady ďalších stringov, ktoré by ste mohli potrebovať v aplikácii -->
+    <string name="generate_qr_code_title">Generovať QR kód</string>
+    <string name="label_qr_code_type">Typ QR kódu:</string>
+    <string name="label_qr_code_content">Obsah:</string>
+    <string name="button_generate">Generovať</string>
+    <string name="button_share">Zdieľať</string>
+    <string name="favorites_title">Obľúbené</string>
+    <string name="history_title">História</string>
+    <string name="settings_title">Nastavenia</string>
+    <string name="qr_code_saved_success">QR kód bol úspešne uložený do galérie.</string>
+    <string name="qr_code_saved_error">Chyba pri ukladaní QR kódu do galérie.</string>
+    <string name="permission_write_storage_denied">Povolenie na zápis do úložiska bolo zamietnuté.
+        QR kód nemôže byť uložený.
+    </string>
+    <string name="input_error_empty">Pole nesmie byť prázdne.</string>
+
+
+    <!-- Vaše existujúce stringy -->
+        <!-- <string name="app_name">QR</string> -->
+
+        <!-- <string name="screen_title_scan">Skenovať kód</string> -->
+
+        <!-- <string name="dialog_title_clear_history">Vymazať celú históriu?</string> -->
+
+        <!-- <string name="dialog_message_clear_history">Naozaj chcete natrvalo odstrániť všetky
+            naskenované kódy?
+        </string> -->
+
+    <!-- <string name="app_name">QR App</string> -->
+
+    <!-- <string name="qr_format_hint_email_message">Zadajte adresu, predmet a telo správy (formát:
+        mailto:adresa?subject=PREDMET&amp;body=TELO).
+    </string> -->
+
+    <!-- <string name="qr_format_hint_mms">Zadajte číslo, predmet a text správy (formát: mmsto:&lt;číslo&gt;:&lt;predmet&gt;:&lt;správa&gt;).
+        Podpora sa môže líšiť.
+    </string> -->
+
+    <!-- <string name="qr_format_hint_contact_mecard">Jednoduchý formát kontaktu: Meno, Tel, Email, atď.
+        (MECARD:N:&lt;Meno&gt;;TEL:&lt;číslo&gt;;EMAIL:&lt;email&gt;;;).
+    </string> -->
+
+    <!-- <string name="qr_format_hint_app_store_link">Napr. market://details?id=com.vasa.aplikacia alebo
+        https://itunes.apple.com/
+    </string> -->
+
+    <!-- <string name="qr_format_hint_crypto_address">Zadajte adresu peňaženky a voliteľne sumu (napr.
+        bitcoin:&lt;adresa&gt;?amount=&lt;suma&gt;).
+    </string> -->
+
+    <!-- <string name="qr_format_hint_epc_payment">Špecifický formát pre SEPA platby (začína
+        BCD\\n002...).
+    </string> -->
+
+    <!-- <string name="qr_format_hint_totp_authenticator">Formát pre nastavenie dvojfaktorovej
+        autentifikácie (otpauth://totp/...).
+    </string> -->
+
+    <!-- <string name="button_save_to_gallery">Uložiť do galérie</string> -->
+
+            <!-- <string name="qr_format_hint_text">Zadajte ľubovoľný text</string> -->
+
+            <!-- <string name="qr_format_hint_url">napr. https://www.priklad.sk</string> -->
+
+            <!-- <string name="qr_format_hint_wifi">Formát: WIFI:S:NAZOV;T:WPA;P:HESLO;;</string> -->
+
+
+            <!-- <string name="qr_type_email_address">Emailová adresa</string> -->
+
+            <!-- <string name="qr_format_hint_email_address">napr. meno@priklad.sk</string> -->
+
+
+            <!-- <string name="qr_type_email_message">Emailová správa</string> -->
+
+            <!-- <string name="qr_format_hint_email_message">Adresát, predmet, telo správy</string> -->
+
+    <string name="title_create_specific_qr">Vytvoriť: %1$s</string> <!-- %1$s bude nahradené názvom typu -->
+    <string name="generated_qr_content_label">Vygenerovaný QR kód:</string>
+    <string name="qr_code_content_textfield_label">Obsah QR kódu</string>
+    <string name="button_save_to_favorites">Do obľúbených</string>
+    <string name="button_download_to_gallery">Stiahnuť</string>
+    <string name="form_not_implemented_for_type">Formulár pre typ \'%1$s\' ešte nie je implementovaný.</string>
+    <string name="error_no_type_selected_for_form">Chyba: Nie je vybraný žiadny typ QR kódu pre zobrazenie formulára.</string>
+    <string name="toast_saved_to_favorites_todo">Uložené do obľúbených (TODO)</string>
+    <string name="toast_download_to_gallery_todo">Sťahovanie do galérie (TODO)</string>
+
+    <string name="generated_qr_code_label">Vygenerovaný QR kód:</string>
+    <string name="qr_code_image_desc">Obrázok QR kódu</string>
+    <string name="error_generating_qr_image">Chyba pri generovaní obrázku QR kódu. Skontrolujte zadané údaje alebo skúste kratší text.</string>
 
 </resources>

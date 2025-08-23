@@ -157,7 +157,7 @@ fun MainContent(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun DefaultPreview2() {
     MaterialTheme { // Uistite sa, že máte nastavenú Material3 tému
         MainScreen()
     }

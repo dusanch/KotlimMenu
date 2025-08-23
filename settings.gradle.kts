@@ -1,24 +1,29 @@
+// Súbor: settings.gradle.kts
+// Umiestnenie: C:\Users\dusan\AndroidStudioProjects\QR\settings.gradle.kts
+
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
+
+    // TÁTO ČASŤ JE KĽÚČOVÁ PRE KATALÓG VERZIÍ:
+   /* versionCatalogs {
+        create("libs") { // "libs" je názov, ktorý používate (napr. libs.plugins...)
+            from(files("gradle/libs.versions.toml")) // Cesta k vášmu .toml súboru z koreňa projektu
+        }
+    }*/
 }
 
-rootProject.name = "QR"
-include(":app")
- 
+rootProject.name = "QR" // Názov vášho projektu
+include(":app")         // Zahrnutie vášho :app modulu
+
