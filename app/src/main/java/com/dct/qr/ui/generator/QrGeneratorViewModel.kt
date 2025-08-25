@@ -35,14 +35,16 @@ data class QrGeneratorUiState(
     val textFormData: TextFormData = TextFormData(),
     val urlFormData: UrlFormData = UrlFormData(),
     val generatedQrContent: String? = null,
-    val generatedQrBitmap: Bitmap? = null, // Pre vygenerovaný obrázok QR kódu
+    val generatedQrBitmap: Bitmap? = null,
     val isFormValid: Boolean = false,
-    val isGeneratingQr: Boolean = false // Na zobrazenie indikátora načítania
+    val isGeneratingQr: Boolean = false,
+    val qrCodeError: String? = null
 )
 
 enum class GeneratorScreenState {
     TYPE_SELECTION,
-    FORM_INPUT
+    FORM_INPUT,
+    QR_DISPLAY
 }
 
 class QrGeneratorViewModel : ViewModel() {
@@ -56,11 +58,12 @@ class QrGeneratorViewModel : ViewModel() {
                 currentScreen = GeneratorScreenState.FORM_INPUT,
                 selectedType = type,
                 generatedQrContent = null,
-                generatedQrBitmap = null, // Reset bitmapy
+                generatedQrBitmap = null,
                 textFormData = TextFormData(),
                 urlFormData = UrlFormData(),
                 isFormValid = checkFormValidity(type, TextFormData(), UrlFormData()),
-                isGeneratingQr = false
+                isGeneratingQr = false,
+                qrCodeError = null
             )
         }
     }
@@ -71,11 +74,12 @@ class QrGeneratorViewModel : ViewModel() {
                 currentScreen = GeneratorScreenState.TYPE_SELECTION,
                 selectedType = null,
                 generatedQrContent = null,
-                generatedQrBitmap = null, // Reset bitmapy
+                generatedQrBitmap = null,
                 textFormData = TextFormData(),
                 urlFormData = UrlFormData(),
                 isFormValid = false,
-                isGeneratingQr = false
+                isGeneratingQr = false,
+                qrCodeError = null
             )
         }
     }
@@ -87,10 +91,9 @@ class QrGeneratorViewModel : ViewModel() {
                 val newFormData = currentState.textFormData.copy(text = newText, textError = error)
                 currentState.copy(
                     textFormData = newFormData,
-                    generatedQrContent = null, // Reset pri zmene vstupu
-                    generatedQrBitmap = null,  // Reset bitmapy
                     isFormValid = checkFormValidity(type, newFormData, currentState.urlFormData),
-                    isGeneratingQr = false
+                    isGeneratingQr = false,
+                    qrCodeError = null // Chyba sa resetuje pri zmene vstupu
                 )
             } ?: currentState
         }
@@ -112,10 +115,9 @@ class QrGeneratorViewModel : ViewModel() {
                 val newFormData = currentState.urlFormData.copy(url = newUrl, urlError = error)
                 currentState.copy(
                     urlFormData = newFormData,
-                    generatedQrContent = null, // Reset pri zmene vstupu
-                    generatedQrBitmap = null,  // Reset bitmapy
                     isFormValid = checkFormValidity(type, currentState.textFormData, newFormData),
-                    isGeneratingQr = false
+                    isGeneratingQr = false,
+                    qrCodeError = null // Chyba sa resetuje pri zmene vstupu
                 )
             } ?: currentState
         }
@@ -129,89 +131,116 @@ class QrGeneratorViewModel : ViewModel() {
         return when (type) {
             QrCodeType.TEXT -> textData.text.isNotBlank() && textData.textError == null
             QrCodeType.URL -> urlData.url.isNotBlank() && urlData.urlError == null
+            // TODO: Implementovať validáciu pre ostatné typy, ak vyžadujú vstupné polia
             else -> {
-                // Pre ostatné typy, ktoré ešte nemajú formulár, zatiaľ false
-                // Ak typ má requiresComplexInput = true, ale ešte nie je tu case, vrátime false
+                // Pre typy, ktoré nevyžadujú komplexný vstup (napr. WIFI, VEVENT, atď.),
+                // kde by formulár mohol byť rozsiahlejší a validácia zložitejšia.
+                // Ak typ vyžaduje komplexný vstup (type.requiresComplexInput == true),
+                // ale ešte tu nie je case, vrátime false, kým sa neimplementuje.
+                // Ak nevyžaduje komplexný vstup (je to len placeholder), môžeme vrátiť true
+                // alebo false podľa toho, či chceme povoliť generovanie "prázdneho" QR (čo zvyčajne nie).
                 if (type.requiresComplexInput) {
                     Log.d("checkFormValidity", "Typ ${type.name} vyžaduje komplexný vstup, ale validácia nie je implementovaná.")
                     false
                 } else {
-                    Log.d("checkFormValidity", "Validácia pre typ ${type.name} nie je špecifikovaná.")
+                    // Pre jednoduché typy, ktoré nemajú špecifický formulár, zatiaľ false.
+                    // Alebo ak by sme chceli pre niektoré typy povoliť "prázdne" generovanie, tu by bola logika.
+                    Log.d("checkFormValidity", "Validácia pre typ ${type.name} nie je špecifikovaná, predpokladá sa nevalidný.")
                     false
                 }
             }
         }
     }
 
-    fun generateQrCode() {
+    fun generateQrCodeAndNavigate() {
         val currentState = _uiState.value
         if (!currentState.isFormValid || currentState.selectedType == null) {
             Log.w("QrGeneratorVM", "Pokus o generovanie QR kódu s nevalidným formulárom alebo bez vybraného typu.")
+            _uiState.update { it.copy(qrCodeError = "Formulár nie je správne vyplnený alebo nie je vybraný typ QR kódu.", isGeneratingQr = false) }
             return
         }
 
-        _uiState.update { it.copy(isGeneratingQr = true, generatedQrBitmap = null, generatedQrContent = null) } // Začíname generovať
+        _uiState.update { it.copy(isGeneratingQr = true, generatedQrBitmap = null, generatedQrContent = null, qrCodeError = null) }
 
-        val selectedType = currentState.selectedType // Už vieme, že nie je null
+        val selectedType = currentState.selectedType
         val contentToEncode = when (selectedType) {
             QrCodeType.TEXT -> currentState.textFormData.text
             QrCodeType.URL -> {
                 val rawUrl = currentState.urlFormData.url
+                // Zaistíme, že URL má schému
                 if (rawUrl.startsWith("http://") || rawUrl.startsWith("https://")) {
                     rawUrl
                 } else {
                     (selectedType.dataPrefix ?: "https://") + rawUrl
                 }
             }
+            // TODO: Implementovať získavanie obsahu pre ostatné QrCodeType
             else -> {
                 Log.w("QrGeneratorVM", "Generovanie pre typ ${selectedType.name} ešte nie je plne implementované pre textový obsah.")
-                null
+                _uiState.update { it.copy(isGeneratingQr = false, qrCodeError = "Generovanie pre typ ${selectedType.name} ešte nie je podporované.") }
+                return
             }
         }
 
-        if (contentToEncode != null) {
-            viewModelScope.launch {
-                val bitmap = try {
-                    createQrBitmapFromContent(contentToEncode)
-                } catch (e: Exception) {
-                    Log.e("QrGeneratorVM", "Chyba pri generovaní QR bitmapy pre: $contentToEncode", e)
-                    null
-                }
+        if (contentToEncode.isBlank()) {
+             Log.w("QrGeneratorVM", "Obsah na zakódovanie je prázdny pre typ ${selectedType.name}.")
+            _uiState.update { it.copy(isGeneratingQr = false, qrCodeError = "Obsah na zakódovanie je prázdny.") }
+            return
+        }
+
+        viewModelScope.launch {
+            val bitmap = try {
+                createQrBitmapFromContent(contentToEncode)
+            } catch (e: Exception) {
+                Log.e("QrGeneratorVM", "Chyba pri generovaní QR bitmapy pre: $contentToEncode", e)
+                null
+            }
+
+            if (bitmap != null) {
                 _uiState.update {
                     it.copy(
-                        generatedQrContent = contentToEncode, // Uložíme aj textový obsah
+                        generatedQrContent = contentToEncode,
                         generatedQrBitmap = bitmap,
-                        isGeneratingQr = false // Generovanie ukončené
+                        isGeneratingQr = false,
+                        currentScreen = GeneratorScreenState.QR_DISPLAY,
+                        qrCodeError = null
                     )
                 }
-            }
-        } else {
-            // Ak nebol získaný obsah na kódovanie
-            _uiState.update {
-                it.copy(
-                    generatedQrContent = null,
-                    generatedQrBitmap = null,
-                    isGeneratingQr = false // Generovanie ukončené (neúspešne)
-                )
+            } else {
+                _uiState.update {
+                    it.copy(
+                        isGeneratingQr = false,
+                        qrCodeError = "Chyba pri vytváraní obrázku QR kódu.",
+                        generatedQrBitmap = null,
+                        generatedQrContent = contentToEncode // Ponecháme obsah pre prípadnú diagnostiku
+                    )
+                }
             }
         }
     }
 
-    /**
-     * Generuje QR kód ako Bitmap z daného textového obsahu pomocou knižnice ZXing.
-     * Táto funkcia by mala byť volaná z korutiny bežiacej na Dispatchers.Default alebo Dispatchers.IO.
-     */
+    fun navigateBackFromQrDisplay() {
+        _uiState.update {
+            it.copy(
+                currentScreen = GeneratorScreenState.FORM_INPUT, // Vrátime sa na formulár
+                generatedQrBitmap = null, // Reset QR dát po opustení obrazovky zobrazenia
+                generatedQrContent = null,
+                qrCodeError = null // Reset chybovej správy
+            )
+        }
+    }
+
     private suspend fun createQrBitmapFromContent(
         content: String,
-        width: Int = 512, // Šírka výslednej bitmapy v pixeloch
-        height: Int = 512, // Výška výslednej bitmapy v pixeloch
-        marginBlocks: Int = 1 // Veľkosť okraja v blokoch QR kódu (0 pre žiadny okraj)
+        width: Int = 512,
+        height: Int = 512,
+        marginBlocks: Int = 1
     ): Bitmap? {
         return withContext(Dispatchers.Default) {
             try {
                 val hints = mutableMapOf<EncodeHintType, Any>()
-                hints[EncodeHintType.CHARACTER_SET] = "UTF-8" // Explicitné nastavenie kódovania
-                hints[EncodeHintType.MARGIN] = marginBlocks    // Nastavenie okraja
+                hints[EncodeHintType.CHARACTER_SET] = "UTF-8"
+                hints[EncodeHintType.MARGIN] = marginBlocks
 
                 val bitMatrix: BitMatrix = MultiFormatWriter().encode(
                     content,
@@ -253,8 +282,10 @@ class QrGeneratorViewModel : ViewModel() {
             Log.d("QrGeneratorVM", "Požiadavka na stiahnutie QR bitmapy do galérie.")
             // TODO: Implementovať logiku pre generovanie Bitmapy a uloženie do galérie
             // Bude to vyžadovať Context a pravdepodobne CoroutineScope pre I/O operácie.
+            // Môžete použiť MediaStore API.
         } else {
             Log.w("QrGeneratorVM", "Nie je čo stiahnuť do galérie (chýba vygenerovaná bitmapa).")
         }
     }
 }
+

@@ -257,5 +257,36 @@
     <string name="generated_qr_code_label">Vygenerovaný QR kód:</string>
     <string name="qr_code_image_desc">Obrázok QR kódu</string>
     <string name="error_generating_qr_image">Chyba pri generovaní obrázku QR kódu. Skontrolujte zadané údaje alebo skúste kratší text.</string>
+    <string name="screen_title_qr_display">aa11</string>
+    <string name="button_generate_and_show">bb22</string>
+    <string name="qr_code_content_is">zssss</string>
+    <string name="action_back_to_form">ds4s25</string>
+    <string name="error_unknown_qr_display">9d5d99</string>
+    <string name="button_copy_content">copy content</string>
+    <string name="text_qr_code_found">qr code not found</string>
+    <string name="text_processing_image">procesing image</string>
+    <string name="button_select_image_to_scan">select image to scan</string>
+    <string name="cd_navigate_back">navigate back</string>
 
+
+    <!-- <string name="generated_qr_code_label">Vygenerovaný QR kód</string> -->
+
+    <!-- <string name="qr_code_content_is">Obsah: %1$s</string> -->
+
+    <!-- <string name="action_back_to_form">Späť na formulár</string> -->
+
+    <!-- <string name="error_unknown_qr_display">Neznáma chyba pri zobrazení QR kódu.</string> -->
+
+    <!-- <string name="screen_title_qr_display">Vygenerovaný QR Kód</string> -->
+
+    <!-- <string name="button_generate_and_show">Generovať a Zobraziť QR</string> -->
+
+    <!-- ... ostatné stringy ... -->
+    <!-- <string name="screen_title_scan_image">Skenovať QR z obrázka</string> -->
+
+    <!-- ... ostatné stringy ... -->
+    <!-- <string name="screen_title_scan_image">Skenovať QR z obrázka</string> -->
+
+    <!-- ... ostatné stringy ... -->
+    <!-- <string name="screen_title_scan_image">Skenovať QR z obrázka</string> -->
 </resources>

@@ -63,7 +63,7 @@ dependencies {
     // implementation("androidx.camera:camera-extensions:${cameraxVersion}") // Voliteľné pre efekty
 
     // ML Kit Barcode Scanning
-    implementation("com.google.mlkit:barcode-scanning:17.2.0") // Môžete zvážiť presun do libs.versions.toml
+    git  // Môžete zvážiť presun do libs.versions.toml
 
     // Základné AndroidX a Compose knižnice z libs.versions.toml
     implementation(libs.androidx.core.ktx)
@@ -109,5 +109,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.0-beta01") // Alebo najnovšia
 
     implementation(libs.zxing.core)
+
 
 }
